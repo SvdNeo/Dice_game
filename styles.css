@@ -32,3 +32,34 @@ h1 {
   font-size: 2.5rem;
   margin: 25px 0;
 }
+.rules-container {
+    display: none;
+    background-color: var(--light-grey);
+    color: var(--black);
+    width: 50%;
+    margin: 20px auto;
+    height: 300px;
+    border-radius: 10px;
+    overflow-y: scroll;
+  }
+  
+  .rules-container ul {
+    list-style-type: none;
+  }
+  
+  .points {
+    margin-top: 15px;
+  }
+  
+  main {
+    background-color: var(--light-grey);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 1rem;
+    margin: auto;
+    justify-items: center;
+    width: 50%;
+    border-radius: 10px;
+  }
+  

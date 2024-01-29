@@ -131,4 +131,77 @@ const rollDice = () => {
     });
   };
   
+  const resetGame = () => {
+    diceValuesArr = [0, 0, 0, 0, 0];
+    score = 0  totalScoreText.textContent = totalScore;
+    scoreHistory.innerHTML = "";
+  
+    currentRoundRollsText.textContent = rolls;
+    currentRoundText.textContent = round;
+  
+    resetRadioOption();
+  };
+  
+  rollDiceBtn.addEventListener("click", () => {
+    if (rolls === 3) {
+      alert("You have made three rolls this round. Please select a score.");
+    } else {
+      rolls++;
+      resetRadioOption();
+      rollDice();
+      updateStats();
+      getHighestDuplicates(diceValuesArr);
+      detectFullHouse(diceValuesArr);
+  checkForStraights(diceValuesArr)
+    }
+  });
+  
+  rulesBtn.addEventListener("click", () => {
+    isModalShowing = !isModalShowing;
+  
+    if (isModalShowing) {
+      rulesBtn.textContent = "Hide Rules";
+      rulesContainer.style.display = "block";
+    } else {
+      rulesBtn.textContent = "Show Rules";
+      rulesContainer.style.display = "none";
+    }
+  });
+  
+  keepScoreBtn.addEventListener("click", () => {
+    let selectedValue;
+    let achieved;
+  
+    for (const radioButton of scoreInputs) {
+      if (radioButton.checked) {
+        selectedValue = radioButton.value;
+        achieved = radioButton.id;
+        break;
+      }
+    }
+  
+    if (selectedValue) {
+      rolls = 0;
+      round++;
+      updateStats();
+      resetRadioOption();
+      updateScore(selectedValue, achieved);
+      if (round > 6) {
+        setTimeout(() => {
+          alert(`Game Over! Your total score is ${totalScore}`);
+          resetGame();
+        }, 500);
+      }
+    } else {
+      alert("Please select an option or roll the dice");
+    }
+  });;
+    totalScore = 0;
+    round = 1;
+    rolls = 0;
+  
+    listOfAllDice.forEach((dice, index) => {
+      dice.textContent = diceValuesArr[index];
+    });
+  
   

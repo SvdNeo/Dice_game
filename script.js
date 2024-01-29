@@ -35,4 +35,53 @@ const rollDice = () => {
     currentRoundText.textContent = round;
   };
   
+  const updateRadioOption = (optionNode, score) => {
+    scoreInputs[optionNode].disabled = false;
+    scoreInputs[optionNode].value = score;
+    scoreSpans[optionNode].textContent = `, score = ${score}`;
+  };
+  
+  const updateScore = (selectedValue, achieved) => {
+    totalScore += parseInt(selectedValue);
+    totalScoreText.textContent = totalScore;
+  
+    scoreHistory.innerHTML += `<li>${achieved} : ${selectedValue}</li>`;
+  };
+  
+  const getHighestDuplicates = (arr) => {
+    const counts = {};
+  
+    for (const num of arr) {
+      if (counts[num]) {
+        counts[num]++;
+      } else {
+        counts[num] = 1;
+      }
+    }
+  
+    let highestCount = 0;
+  
+    for (const num of arr) {
+      const count = counts[num];
+      if (count >= 3 && count > highestCount) {
+        highestCount = count;
+      }
+      if (count >= 4 && count > highestCount) {
+        highestCount = count;
+      }
+    }
+  
+    const sumOfAllDice = diceValuesArr.reduce((a, b) => a + b, 0);
+  
+    if (highestCount >= 4) {
+      updateRadioOption(1, sumOfAllDice);
+    }
+  
+    if (highestCount >= 3) {
+      updateRadioOption(0, sumOfAllDice);
+    }
+  
+    updateRadioOption(5, 0);
+  };
+  
   
